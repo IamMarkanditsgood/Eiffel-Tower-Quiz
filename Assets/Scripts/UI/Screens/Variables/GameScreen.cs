@@ -6,6 +6,7 @@ using UnityEngine.UI;
 
 public class GameScreen : BasicScreen
 {
+    [SerializeField] private ConfettiEffectUI _confettiEffectUI;
     [SerializeField] private Image _questionImage;
     [SerializeField] private TMP_Text _questionText;
     [SerializeField] private TMP_Text _messageText;
@@ -129,6 +130,7 @@ public class GameScreen : BasicScreen
         _messageText.gameObject.SetActive(true);
         if (isCorect)
         {
+            _confettiEffectUI?.PlayConfetti(_delayBeforeNextQuestion);
             _messageText.text = "Congratulations! You've won!";
         }
         else
