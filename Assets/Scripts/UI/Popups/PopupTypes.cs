@@ -1,11 +1,5 @@
 public enum PopupTypes 
 {
-    NewGameConfirmation,
-    EquipmentBuyConfirmation,
-    WeaponBuyConfirmation,
-    WeaponUpdateConfirmation,
-    Pause,
+    CategorySelection,
     Default,
-    Message,
-    MissionComplete,
 }

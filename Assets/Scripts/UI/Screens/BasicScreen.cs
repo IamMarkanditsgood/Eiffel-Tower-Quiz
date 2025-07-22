@@ -6,10 +6,11 @@ public abstract class BasicScreen : MonoBehaviour
     [SerializeField] private GameObject _view;
     [SerializeField] private ScreenTypes _screenType;
 
-    [Header("ForTest")]
-    [SerializeField] protected bool _isActive;
+    protected bool _isActive;
 
     public ScreenTypes ScreenType => _screenType;
+
+    public virtual void SetInitData(object data) { }
 
     public virtual void Init()
     {

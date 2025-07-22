@@ -1,7 +1,4 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 
 [Serializable]
 public class GamePlayManager 
@@ -30,5 +27,15 @@ public class GamePlayManager
         {
             throw new Exception("No instance of GamePlayManager to destroy.");
         }
+    }
+
+    public void Subscribe()
+    {
+        // Add subscription logic here if needed
+    }
+
+    public void UnSubscribe()
+    {
+        // Add unsubscription logic here if needed
     }
 }

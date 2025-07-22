@@ -12,14 +12,11 @@ public abstract class BasicPopup : MonoBehaviour
 
     public PopupTypes PopupType => _popupType;
 
-    private void Start()
-    {
-        Subscribe();
-    }
 
-    private void OnDestroy()
+    public virtual void SetInitData(object data) { }
+
+    public void Init()
     {
-        Unsubscribe();
     }
 
     public virtual void Subscribe()

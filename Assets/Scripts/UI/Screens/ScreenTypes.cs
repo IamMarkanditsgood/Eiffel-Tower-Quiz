@@ -1,15 +1,6 @@
 public enum ScreenTypes
 {
-    Home,
-    Settings,
-    Load,
-    Save,
-    Storage,
-    Journal,
+    MainMenu,
+    GamePlay,
     Default,
-    Skills,
-    CharacterInfo,
-    Title,
-    HUD,
-    Lose,
 }

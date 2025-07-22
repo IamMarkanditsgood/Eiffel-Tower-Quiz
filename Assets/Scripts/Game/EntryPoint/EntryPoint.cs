@@ -1,28 +1,52 @@
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class EntryPoint : MonoBehaviour
 {
     [SerializeField] private UIManager _uiManager;
+    [SerializeField] private GamePlayManager _gamePlayManager;
 
     private void Awake()
     {
-        if (_uiManager == null)
-        {
-            Debug.LogError("UIManager is not assigned in EntryPoint.");
-            return;
-        }
+        Init();
+    }
 
-        _uiManager.Init();
+    private void Start()
+    {
+        Subscribe();
+    }
+    
+    private void OnDisable()
+    {
+        UnSubscribe();
     }
 
     private void OnDestroy()
     {
-        if (_uiManager != null)
-        {
-            _uiManager.Destroy();
-        }
+        UnSubscribe();
+        Destroy();
+    }
+
+    private void Init()
+    {
+        _uiManager?.Init();
+        _gamePlayManager?.Init();
+    }
+
+    private void Destroy()
+    {
+        _uiManager?.Destroy();
+        _gamePlayManager?.Destroy();
+    }
+
+    private void Subscribe()
+    {
+        _uiManager?.Subscribe();
+        _gamePlayManager?.Subscribe();
+    }
+
+    private void UnSubscribe()
+    {
+        _uiManager?.UnSubscribe();
+        _gamePlayManager?.UnSubscribe();
     }
 }
