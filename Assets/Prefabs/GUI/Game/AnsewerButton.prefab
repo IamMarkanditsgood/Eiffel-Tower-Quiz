@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 7757335995763417748}
   - component: {fileID: 7642761110994297044}
   - component: {fileID: 1491631700185073632}
+  - component: {fileID: 290406182111629818}
   m_Layer: 5
   m_Name: AnsewerButton
   m_TagString: Untagged
@@ -121,6 +122,24 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &290406182111629818
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 238558936314584594}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e645217a0e45a824dad9e011868859bf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _button: {fileID: 1491631700185073632}
+  _label: {fileID: 10202407724276743}
+  _normalColor: {r: 1, g: 1, b: 1, a: 1}
+  _hoverColor: {r: 0, g: 1, b: 1, a: 1}
+  _cursorTexture: {fileID: 2800000, guid: f4130b5b38008d2419022c2b96df9bab, type: 3}
+  _hotspot: {x: 0, y: 0}
 --- !u!1 &3969205165961846695
 GameObject:
   m_ObjectHideFlags: 0

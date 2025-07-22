@@ -1,9 +1,17 @@
 using System;
+using System.Collections.Generic;
+using UnityEngine;
 
 [Serializable]
 public class GamePlayManager 
 {
     public static GamePlayManager Instance { get; private set; }
+
+    [SerializeField] private List<CategoryConfig> _categoryConfigs;
+
+    public List<CategoryConfig> CategoryConfigs => _categoryConfigs;
+
+    public CategoryConfig CurrentCategory { get; private set; }
 
     public void Init()
     {
@@ -38,4 +46,19 @@ public class GamePlayManager
     {
         // Add unsubscription logic here if needed
     }
+
+    public void SetCurrentCategory(CategoryTypes category)
+    {
+        CurrentCategory = GetCategoryConfig(category);
+    }
+
+    private CategoryConfig GetCategoryConfig(CategoryTypes categoryType)
+    {
+        foreach (CategoryConfig categoryConfig in _categoryConfigs)
+        {
+            if(categoryConfig.CategoryType == categoryType) { return categoryConfig; }
+        }
+        return null;
+    }
+
 }

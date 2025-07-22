@@ -25,6 +25,6 @@ public class MainMenu : BasicScreen
 
     private void PlayButtonPressed()
     {
-
+        UIManager.Instance.ShowPopup(PopupTypes.CategorySelection);
     }
 }

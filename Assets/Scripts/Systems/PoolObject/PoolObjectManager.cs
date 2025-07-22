@@ -4,13 +4,16 @@ using UnityEngine;
 
 [Serializable]
 public class PoolObjectManager
-{/*
-    [SerializeField] private BasicRoomManager basicRoomManagerPrefab;
+{
+    [SerializeField] private CategoryButton _categoryButtonPrefab;
+    [SerializeField] private AnswerButton _answerButtonPrefab;
 
-    [SerializeField] private Transform _basicRoomManagerContainer;
+    [SerializeField] private Transform _categoryButtonContainer;
+    [SerializeField] private Transform _answerContainer;
 
-    public ObjectPool<BasicRoomManager> basicRoomManagerPool = new();
-*/
+    public ObjectPool<CategoryButton> CategoryButtonPool = new();
+    public ObjectPool<AnswerButton> AnserButtonPool = new();
+
     public static PoolObjectManager instant;
 
     public void Init()
@@ -32,6 +35,7 @@ public class PoolObjectManager
 
     private void InitPoolObjects()
     {
-        //basicRoomManagerPool.InitializePool(basicRoomManagerPrefab, _basicRoomManagerContainer);
+        CategoryButtonPool.InitializePool(_categoryButtonPrefab, _categoryButtonContainer);
+        AnserButtonPool.InitializePool(_answerButtonPrefab, _answerContainer);
     }
 }

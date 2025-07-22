@@ -4,7 +4,7 @@ public class EntryPoint : MonoBehaviour
 {
     [SerializeField] private UIManager _uiManager;
     [SerializeField] private GamePlayManager _gamePlayManager;
-
+    [SerializeField] private PoolObjectManager _poolObjectManager;
     private void Awake()
     {
         Init();
@@ -28,12 +28,14 @@ public class EntryPoint : MonoBehaviour
 
     private void Init()
     {
+        _poolObjectManager.Init();
         _uiManager?.Init();
         _gamePlayManager?.Init();
     }
 
     private void Destroy()
     {
+        _poolObjectManager.DeInit();
         _uiManager?.Destroy();
         _gamePlayManager?.Destroy();
     }
