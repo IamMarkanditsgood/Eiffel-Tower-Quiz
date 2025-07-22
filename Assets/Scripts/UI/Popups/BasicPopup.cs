@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 public abstract class BasicPopup : MonoBehaviour
@@ -11,7 +10,6 @@ public abstract class BasicPopup : MonoBehaviour
     public bool isActive;
 
     public PopupTypes PopupType => _popupType;
-
 
     public virtual void SetInitData(object data) { }
 
@@ -60,5 +58,4 @@ public abstract class BasicPopup : MonoBehaviour
     public abstract void SetPopup();
 
     public abstract void ResetPopup();
-
 }

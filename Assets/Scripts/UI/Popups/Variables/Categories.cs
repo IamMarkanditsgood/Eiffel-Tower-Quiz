@@ -1,9 +1,8 @@
 using System.Collections.Generic;
-using UnityEngine;
 
 public class Categories : BasicPopup
 {
-    private List<CategoryButton> _categories = new List<CategoryButton>();
+    private List<InteractiveLabledButton> _categories = new List<InteractiveLabledButton>();
     private List<CategoryConfig> _categoryConfig = new List<CategoryConfig>();
 
     public override void ResetPopup()
@@ -21,7 +20,7 @@ public class Categories : BasicPopup
     {
         for(int i = 0; i < _categoryConfig.Count; i++)
         {
-            CategoryButton categoryButton = PoolObjectManager.instant.CategoryButtonPool.GetFreeComponent();
+            InteractiveLabledButton categoryButton = PoolObjectManager.instant.CategoryButtonPool.GetFreeComponent();
             _categories.Add(categoryButton);
             categoryButton.SetLabelText(_categoryConfig[i].CategoryName);
         }
@@ -31,7 +30,7 @@ public class Categories : BasicPopup
 
     private void ResetCategoryButtons()
     {
-        foreach (CategoryButton categoryButton in _categories)
+        foreach (var categoryButton in _categories)
         {
             PoolObjectManager.instant.CategoryButtonPool.DisableComponent(categoryButton);
         }
@@ -40,7 +39,7 @@ public class Categories : BasicPopup
         _categories.Clear();
     }
 
-    private void SubscribeCategoryButtons(List<CategoryButton> categoryButtons)
+    private void SubscribeCategoryButtons(List<InteractiveLabledButton> categoryButtons)
     {
         for(int i = 0; i < categoryButtons.Count; i++)
         {
@@ -49,7 +48,7 @@ public class Categories : BasicPopup
         }
     }
 
-    private void UnSubscibeCategoryButtons(List<CategoryButton> categoryButtons)
+    private void UnSubscibeCategoryButtons(List<InteractiveLabledButton> categoryButtons)
     {
         for (int i = 0; i < categoryButtons.Count; i++)
         {

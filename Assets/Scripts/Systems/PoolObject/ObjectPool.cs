@@ -1,6 +1,4 @@
-using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class ObjectPool<T> where T : Component
@@ -10,8 +8,6 @@ public class ObjectPool<T> where T : Component
 
     private readonly List<T> _enabledPool = new List<T>();
     private readonly List<T> _disabledPool = new List<T>();
-
-    private Coroutine _lifeTimer;
 
     public List<T> EnabledPool => _enabledPool;
     public List<T> DisabledPool => _disabledPool;

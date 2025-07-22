@@ -5,7 +5,10 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class BasicInteractiveTextButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
+/// <summary>
+/// A button with a label that changes color on hover and change a cursor after point on it.
+/// </summary>
+public class InteractiveLabledButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
     [SerializeField] protected Button _button;
     [SerializeField] protected TMP_Text _label;

@@ -23,7 +23,7 @@ public class UIManager
 
         if (_firstLoadedScreen != ScreenTypes.Default)
         {
-            ShowScreen(_firstLoadedScreen);
+            ShowScreen(_firstLoadedScreen, false);
         }
     }
 

@@ -181,7 +181,6 @@ MonoBehaviour:
   _spreadAngle: 60
   _minDistance: 1500
   _maxDistance: 2000
-  _speedRange: {x: 150, y: 250}
   _minSize: {x: 15, y: 15}
   _maxSize: {x: 25, y: 25}
 --- !u!1 &681907572
@@ -1780,8 +1779,8 @@ MonoBehaviour:
     _categoryConfigs:
     - {fileID: 11400000, guid: d2e7b22971c2687488a1a88efd4390a1, type: 2}
   _poolObjectManager:
-    _categoryButtonPrefab: {fileID: 3249679958827689620, guid: 5396ecbc2d9da884381c71475792b473, type: 3}
-    _answerButtonPrefab: {fileID: 290406182111629818, guid: 377e2d4495a80dc47aff5d4df4743f99, type: 3}
+    _categoryButtonPrefab: {fileID: 2870752899107079577, guid: 5396ecbc2d9da884381c71475792b473, type: 3}
+    _answerButtonPrefab: {fileID: 644732474521775867, guid: 377e2d4495a80dc47aff5d4df4743f99, type: 3}
     _confettiPrefab: {fileID: 4661557702379024295, guid: 5ebd958838b05d14e86a52300749c022, type: 3}
     _categoryButtonContainer: {fileID: 7782778804722396455}
     _answerContainer: {fileID: 5933983014652033628}

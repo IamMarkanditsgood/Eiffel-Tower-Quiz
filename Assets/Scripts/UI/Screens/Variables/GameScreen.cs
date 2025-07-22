@@ -12,7 +12,7 @@ public class GameScreen : BasicScreen
     [SerializeField] private TMP_Text _messageText;
     [SerializeField] private float _delayBeforeNextQuestion;
 
-    private List<AnswerButton> _answerButtons = new();
+    private List<InteractiveLabledButton> _answerButtons = new();
 
     private List<QuizQuestionData> _quizQuestions = new();
 
@@ -55,9 +55,9 @@ public class GameScreen : BasicScreen
     {
         for (int i = 0; i < answers.Count; i++)
         {
-            AnswerButton categoryButton = PoolObjectManager.instant.AnserButtonPool.GetFreeComponent();
+            InteractiveLabledButton categoryButton = PoolObjectManager.instant.AnserButtonPool.GetFreeComponent();
             _answerButtons.Add(categoryButton);
-            categoryButton.SetReplyText(answers[i]);
+            categoryButton.SetLabelText(answers[i]);
         }
 
         SubscribeCategoryButtons(_answerButtons);
@@ -65,7 +65,7 @@ public class GameScreen : BasicScreen
 
     private void ResetCategoryButtons()
     {
-        foreach (AnswerButton answerButton in _answerButtons)
+        foreach (InteractiveLabledButton answerButton in _answerButtons)
         {
             PoolObjectManager.instant.AnserButtonPool.DisableComponent(answerButton);
         }
@@ -74,7 +74,7 @@ public class GameScreen : BasicScreen
         _answerButtons.Clear();
     }
 
-    private void SubscribeCategoryButtons(List<AnswerButton> answerButtons)
+    private void SubscribeCategoryButtons(List<InteractiveLabledButton> answerButtons)
     {
         for (int i = 0; i < answerButtons.Count; i++)
         {
@@ -83,7 +83,7 @@ public class GameScreen : BasicScreen
         }
     }
 
-    private void UnSubscibeCategoryButtons(List<AnswerButton> answerButtons)
+    private void UnSubscibeCategoryButtons(List<InteractiveLabledButton> answerButtons)
     {
         for (int i = 0; i < answerButtons.Count; i++)
         {

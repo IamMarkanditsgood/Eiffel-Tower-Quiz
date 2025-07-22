@@ -43,12 +43,10 @@ public class EntryPoint : MonoBehaviour
     private void Subscribe()
     {
         _uiManager?.Subscribe();
-        _gamePlayManager?.Subscribe();
     }
 
     private void UnSubscribe()
     {
         _uiManager?.UnSubscribe();
-        _gamePlayManager?.UnSubscribe();
     }
 }

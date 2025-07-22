@@ -37,16 +37,6 @@ public class GamePlayManager
         }
     }
 
-    public void Subscribe()
-    {
-        // Add subscription logic here if needed
-    }
-
-    public void UnSubscribe()
-    {
-        // Add unsubscription logic here if needed
-    }
-
     public void SetCurrentCategory(CategoryTypes category)
     {
         CurrentCategory = GetCategoryConfig(category);
@@ -60,5 +50,4 @@ public class GamePlayManager
         }
         return null;
     }
-
 }

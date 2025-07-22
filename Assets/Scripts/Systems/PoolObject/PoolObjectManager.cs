@@ -1,21 +1,22 @@
 using System;
-using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
 [Serializable]
 public class PoolObjectManager
 {
-    [SerializeField] private CategoryButton _categoryButtonPrefab;
-    [SerializeField] private AnswerButton _answerButtonPrefab;
+    [Header("Prefabs")]
+    [SerializeField] private InteractiveLabledButton _categoryButtonPrefab;
+    [SerializeField] private InteractiveLabledButton _answerButtonPrefab;
     [SerializeField] private Image _confettiPrefab;
-
+    [Header("Containers")]
     [SerializeField] private Transform _categoryButtonContainer;
     [SerializeField] private Transform _answerContainer;
     [SerializeField] private Transform _confettiContainer;
 
-    public ObjectPool<CategoryButton> CategoryButtonPool = new();
-    public ObjectPool<AnswerButton> AnserButtonPool = new();
+    //Pools
+    public ObjectPool<InteractiveLabledButton> CategoryButtonPool = new();
+    public ObjectPool<InteractiveLabledButton> AnserButtonPool = new();
     public ObjectPool<Image> ConfettiPool = new();
 
     public static PoolObjectManager instant;
