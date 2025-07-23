@@ -35,7 +35,17 @@ To launch the game, I implemented the `EntryPoint` class, which acts as the **ma
   - `GamePlayManager`
 - Starts the overall game flow
 
-The `GamePlayManager` handles gameplay logic and stores all runtime data.
+### 🧠 `GamePlayManager`
+
+The `GamePlayManager` handles all game logic and data. It includes:
+
+- A **list of categories**, each containing its own questions and answer options
+- Dynamic UI adaptation based on category structure:
+  - Automatically adds more buttons when needed
+  - Adjusts question count depending on category content
+  - Adapts the number of answers per question independently for each category
+
+This ensures the game is **data-driven**, requiring no hardcoding or manual UI changes when new content is added.
 
 ---
 
