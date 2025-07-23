@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 35da9c8ec41811a4a8e276b819a6c176, type: 3}
   m_Name: QuizCategory
   m_EditorClassIdentifier: 
-  _categoryType: 0
+  _categoryType: 1
   _categoryName: Countries
   quizQuestions:
   - questionImage: {fileID: 21300000, guid: 75207ea89af08c34a8d245c929a1ae87, type: 3}

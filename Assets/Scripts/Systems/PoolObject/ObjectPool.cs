@@ -19,40 +19,40 @@ public class ObjectPool<T> where T : Component
         _prefab = prefab;
         for (int i = 0; i < sizeOfPool; i++)
         {
-            T obj = UnityEngine.Object.Instantiate(_prefab, _container, true);
-            obj.gameObject.SetActive(false);
-            _disabledPool.Add(obj);          
+            T @object = UnityEngine.Object.Instantiate(_prefab, _container, true);
+            @object.gameObject.SetActive(false);
+            _disabledPool.Add(@object);          
         }
     }
     public T GetFreeComponent(bool shitchOn = true)
     {
-        T obj;
+        T @object;
         if (_disabledPool.Count > 0)
         {
-            obj = _disabledPool[0];       
+            @object = _disabledPool[0];       
             _disabledPool.RemoveAt(0);    
         }
         else
         {
-            obj = UnityEngine.Object.Instantiate(_prefab, _container, true);
+            @object = UnityEngine.Object.Instantiate(_prefab, _container, true);
         }
 
-        _enabledPool.Add(obj);
+        _enabledPool.Add(@object);
 
         if (shitchOn)
         {
-            obj.gameObject.SetActive(true);
+            @object.gameObject.SetActive(true);
         }
 
-        return obj;
+        return @object;
     }
 
-    public void DisableComponent(T obj)
+    public void DisableComponent(T @object)
     {
         
-        obj.gameObject.SetActive(false);
-        _disabledPool.Add(obj);
-        _enabledPool.Remove(obj);
-        obj.transform.SetParent(_container, false);
+        @object.gameObject.SetActive(false);
+        _disabledPool.Add(@object);
+        _enabledPool.Remove(@object);
+        @object.transform.SetParent(_container, false);
     }
 }

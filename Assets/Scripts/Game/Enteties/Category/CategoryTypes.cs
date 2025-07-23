@@ -1,5 +1,5 @@
-public enum CategoryTypes 
+public enum CategoryTypes
 {
-    Countries,
     Default,
+    Countries,
 }

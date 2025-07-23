@@ -1465,7 +1465,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _view: {fileID: 5568114532022146814}
-  _popupType: 0
+  _popupType: 1
   _closeButton: {fileID: 6763863355907416631}
   isActive: 0
   _categoryButtonsContent: {fileID: 7782778804722396455}
@@ -1861,7 +1861,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _view: {fileID: 3280550800949448539}
-  _screenType: 0
+  _screenType: 1
   _playButton: {fileID: 926163716173733576}
 --- !u!1 &3280550800949448539
 GameObject:
@@ -1990,7 +1990,7 @@ MonoBehaviour:
     - {fileID: 8339056695082877508}
     _popups:
     - {fileID: 1874962719611790854}
-    _firstLoadedScreen: 0
+    _firstLoadedScreen: 1
   _gamePlayManager:
     _categoryConfigs:
     - {fileID: 11400000, guid: d2e7b22971c2687488a1a88efd4390a1, type: 2}
@@ -2001,6 +2001,9 @@ MonoBehaviour:
     _categoryButtonContainer: {fileID: 1937751888}
     _answerContainer: {fileID: 859817082}
     _confettiContainer: {fileID: 681907573}
+    _startCategoryButtonSize: 10
+    _startAnswerButtonSize: 10
+    _startConfettiSize: 50
 --- !u!1 &3500490234293906039
 GameObject:
   m_ObjectHideFlags: 0
@@ -2920,7 +2923,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _view: {fileID: 610442060032696058}
-  _screenType: 1
+  _screenType: 2
   _confettiEffectUI: {fileID: 315259733}
   _answerButtonsContent: {fileID: 5933983014652033628}
   _questionImage: {fileID: 1598226401821849142}

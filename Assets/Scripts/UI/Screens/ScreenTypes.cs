@@ -1,6 +1,6 @@
 public enum ScreenTypes
 {
-    MainMenu,
-    GamePlay,
     Default,
+    MainMenu,
+    GamePlay, 
 }

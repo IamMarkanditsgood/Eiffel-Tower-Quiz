@@ -13,6 +13,10 @@ public class PoolObjectManager
     [SerializeField] private Transform _categoryButtonContainer;
     [SerializeField] private Transform _answerContainer;
     [SerializeField] private Transform _confettiContainer;
+    [Header("Pool sizes")]
+    [SerializeField] private int _startCategoryButtonSize = 2;
+    [SerializeField] private int _startAnswerButtonSize = 2;
+    [SerializeField] private int _startConfettiSize = 50;
 
     //Pools
     public ObjectPool<InteractiveLabledButton> CategoryButtonPool = new();
@@ -40,8 +44,8 @@ public class PoolObjectManager
 
     private void InitPoolObjects()
     {
-        CategoryButtonPool.InitializePool(_categoryButtonPrefab, _categoryButtonContainer);
-        AnserButtonPool.InitializePool(_answerButtonPrefab, _answerContainer);
-        ConfettiPool.InitializePool(_confettiPrefab, _confettiContainer, 50);
+        CategoryButtonPool.InitializePool(_categoryButtonPrefab, _categoryButtonContainer, _startCategoryButtonSize);
+        AnserButtonPool.InitializePool(_answerButtonPrefab, _answerContainer, _startAnswerButtonSize);
+        ConfettiPool.InitializePool(_confettiPrefab, _confettiContainer, _startConfettiSize);
     }
 }

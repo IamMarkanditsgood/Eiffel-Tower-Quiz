@@ -110,7 +110,6 @@ public class UIManager
         {
             if(screen.ScreenType == screenType)
             {
-                Debug.Log(screenType);
                 screen.Show();
             }
         }

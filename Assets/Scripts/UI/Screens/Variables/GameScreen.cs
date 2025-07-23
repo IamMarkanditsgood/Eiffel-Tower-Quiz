@@ -133,16 +133,16 @@ public class GameScreen : BasicScreen
         }
         else
         {
-            // Prepare for the next question
+            //Prepare for the next question
             _gamePlayManager.NextQuestion();
             NextQuestion();
         }
     }
 
-    private IEnumerator ShowResult(bool isCorect)
+    private IEnumerator ShowResult(bool isCorrect)
     {
         _messageText.gameObject.SetActive(true);
-        if (isCorect)
+        if (isCorrect)
         {
             _confettiEffectUI?.PlayConfetti(_delayBeforeNextQuestion);
             _messageText.text = _correctMessage;
