@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using TMPro;
+﻿using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -43,14 +41,21 @@ public class InteractiveLabledButton : MonoBehaviour, IPointerEnterHandler, IPoi
     }
     private void OnDisable()
     {
+        if (_image != null)
+            _image.color = _normalColor;
         Cursor.SetCursor(null, Vector2.zero, CursorMode.Auto);
     }
 
     private void OnDestroy()
     {
+        if (_image != null)
+            _image.color = _normalColor;
         Cursor.SetCursor(null, Vector2.zero, CursorMode.Auto);
     }
-
+    /// <summary>
+    /// Handles the pointer enter event by changing the UI element's appearance and cursor.
+    /// </summary>
+    /// <param name="eventData"></param>
     public void OnPointerEnter(PointerEventData eventData)
     {
         if (_image != null)
@@ -58,7 +63,12 @@ public class InteractiveLabledButton : MonoBehaviour, IPointerEnterHandler, IPoi
 
         Cursor.SetCursor(_cursorTexture != null ? _cursorTexture : null, _hotspot, CursorMode.Auto);
     }
-
+    /// <summary>
+    ///  Handles the pointer exit event by resetting the UI element's appearance and cursor.
+    /// </summary>
+    /// <remarks>This method restores the UI element's color to its normal state if an image is associated and
+    /// resets the cursor to the default system cursor.</remarks>
+    /// <param name="eventData">The event data associated with the pointer exit event.</param>
     public void OnPointerExit(PointerEventData eventData)
     {
         if (_image != null)
@@ -66,7 +76,10 @@ public class InteractiveLabledButton : MonoBehaviour, IPointerEnterHandler, IPoi
 
         Cursor.SetCursor(null, Vector2.zero, CursorMode.Auto);
     }
-
+    /// <summary>
+    ///  method sets the label text of the button.
+    /// </summary>
+    /// <param name="text"></param>
     public virtual void SetLabelText(string text)
     {
         if (_label != null)

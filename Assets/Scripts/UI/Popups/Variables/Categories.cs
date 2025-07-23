@@ -1,7 +1,10 @@
 using System.Collections.Generic;
+using UnityEngine;
 
 public class Categories : BasicPopup
 {
+    [SerializeField] private RectTransform _categoryButtonsContent;
+
     private List<InteractiveLabledButton> _categories = new List<InteractiveLabledButton>();
     private List<CategoryConfig> _categoryConfig = new List<CategoryConfig>();
 
@@ -22,6 +25,7 @@ public class Categories : BasicPopup
         {
             InteractiveLabledButton categoryButton = PoolObjectManager.instant.CategoryButtonPool.GetFreeComponent();
             _categories.Add(categoryButton);
+            categoryButton.transform.SetParent(_categoryButtonsContent, false);
             categoryButton.SetLabelText(_categoryConfig[i].CategoryName);
         }
 
@@ -53,7 +57,7 @@ public class Categories : BasicPopup
         for (int i = 0; i < categoryButtons.Count; i++)
         {
             int index = i;
-            categoryButtons[index].ButtonComponent.onClick.RemoveListener(() => CategoryButtonPressed(index));
+            categoryButtons[index].ButtonComponent.onClick.RemoveAllListeners();
         }
     }
 

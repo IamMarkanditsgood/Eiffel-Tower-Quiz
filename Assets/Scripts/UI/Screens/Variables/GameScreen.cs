@@ -7,28 +7,29 @@ using UnityEngine.UI;
 public class GameScreen : BasicScreen
 {
     [SerializeField] private ConfettiEffectUI _confettiEffectUI;
+    [SerializeField] private RectTransform _answerButtonsContent;
     [SerializeField] private Image _questionImage;
     [SerializeField] private TMP_Text _questionText;
     [SerializeField] private TMP_Text _messageText;
     [SerializeField] private float _delayBeforeNextQuestion;
+    [Header("Message")]
+    [SerializeField] private string _correctMessage = "Congratulations! You've won!";
+    [SerializeField] private string _wrongMessage = "Unfortunately, this is an incorrect answer. You lose.";
 
     private List<InteractiveLabledButton> _answerButtons = new();
+    private GamePlayManager _gamePlayManager;
 
-    private List<QuizQuestionData> _quizQuestions = new();
-
-    private int _currentQuestion = 0;
     private bool _canSelectAnswer;
 
     public override void ResetScreen()
     {
-        _currentQuestion = 0;
-        _quizQuestions = null;  
+        _gamePlayManager = null;
         ResetCategoryButtons();
     }
 
     public override void SetScreen()
     {
-        _quizQuestions = GamePlayManager.Instance.CurrentCategory.QuizQuestions;
+        _gamePlayManager = GamePlayManager.Instance;
         NextQuestion();
         _canSelectAnswer = true;
     }
@@ -41,14 +42,14 @@ public class GameScreen : BasicScreen
 
     private void SetQuestion()
     {
-        _questionImage.sprite = _quizQuestions[_currentQuestion].questionImage;
-        _questionText.text = _quizQuestions[_currentQuestion].questionText;
+        _questionImage.sprite = _gamePlayManager.GetCurrentQuestionImage();
+        _questionText.text = _gamePlayManager.GetCurrentQuestionText();
     }
 
     private void SetAnswers()
     {
         ResetCategoryButtons();
-        SetCategoryButtons(_quizQuestions[_currentQuestion].answers);
+        SetCategoryButtons(_gamePlayManager.GetCurrentAnswers());
     }
 
     private void SetCategoryButtons(List<string> answers)
@@ -57,6 +58,7 @@ public class GameScreen : BasicScreen
         {
             InteractiveLabledButton categoryButton = PoolObjectManager.instant.AnserButtonPool.GetFreeComponent();
             _answerButtons.Add(categoryButton);
+            categoryButton.transform.SetParent(_answerButtonsContent, false);
             categoryButton.SetLabelText(answers[i]);
         }
 
@@ -88,7 +90,7 @@ public class GameScreen : BasicScreen
         for (int i = 0; i < answerButtons.Count; i++)
         {
             int index = i;
-            answerButtons[index].ButtonComponent.onClick.RemoveListener(() => AnswerPressed(index));
+            answerButtons[index].ButtonComponent.onClick.RemoveAllListeners();
         }
     }
 
@@ -98,31 +100,43 @@ public class GameScreen : BasicScreen
 
         _canSelectAnswer = false;
 
-        if (_quizQuestions[_currentQuestion].correntAnswer == answerIndex)
+        if (_gamePlayManager.IsCorrectAnswer(answerIndex))
         {
-            CorrectReply();
+            StartCoroutine(CorrectReply()); 
         }
         else
         {
-            WrongReply();
-        }      
+            StartCoroutine(WrongReply()); 
+        }
+
     }
 
-    private void CorrectReply()
+    private IEnumerator CorrectReply()
     {
-        StartCoroutine(ShowResult(true));
+        // here you can add logic to handle correct answer
+        yield return StartCoroutine(ShowResult(true));
+        HandleNextStep();
+    }
 
-        int nextQuestion = _currentQuestion + 1;
-        if (nextQuestion < _quizQuestions.Count - 1)
+    private IEnumerator WrongReply()
+    {
+        // here you can add logic to handle wrong answer
+        yield return StartCoroutine(ShowResult(false));
+        HandleNextStep();
+    }
+
+    private void HandleNextStep()
+    {
+        if (_gamePlayManager.IsLastQuestion())
         {
-            _currentQuestion++;
+            //here you can add logic to finish the game or show final results
+        }
+        else
+        {
+            // Prepare for the next question
+            _gamePlayManager.NextQuestion();
             NextQuestion();
         }
-    }
-
-    private void WrongReply()
-    {
-        StartCoroutine(ShowResult(false));
     }
 
     private IEnumerator ShowResult(bool isCorect)
@@ -131,11 +145,11 @@ public class GameScreen : BasicScreen
         if (isCorect)
         {
             _confettiEffectUI?.PlayConfetti(_delayBeforeNextQuestion);
-            _messageText.text = "Congratulations! You've won!";
+            _messageText.text = _correctMessage;
         }
         else
         {
-            _messageText.text = "Unfortunately, this is an incorrect answer. You lose.";
+            _messageText.text = _wrongMessage;
         }
 
         yield return new WaitForSeconds(_delayBeforeNextQuestion);

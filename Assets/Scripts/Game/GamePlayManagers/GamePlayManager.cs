@@ -13,6 +13,8 @@ public class GamePlayManager
 
     public CategoryConfig CurrentCategory { get; private set; }
 
+    private int _currentQuestionIndex = 0;
+
     public void Init()
     {
         if (Instance == null)
@@ -37,9 +39,73 @@ public class GamePlayManager
         }
     }
 
+    /// <summary>
+    /// Method to set the current category based on the provided CategoryTypes enum.
+    /// </summary>
+    /// <param name="category"></param>
     public void SetCurrentCategory(CategoryTypes category)
     {
         CurrentCategory = GetCategoryConfig(category);
+    }
+
+    /// <summary>
+    /// Method to get the current question image from the current category.
+    /// </summary>
+    /// <returns></returns>
+    public Sprite GetCurrentQuestionImage()
+    {
+        return CurrentCategory.QuizQuestions[_currentQuestionIndex].questionImage;
+    }
+
+    /// <summary>
+    /// Mthod to get the current question text from the current category.
+    /// </summary>
+    /// <returns></returns>
+    public string GetCurrentQuestionText()
+    {
+        return CurrentCategory.QuizQuestions[_currentQuestionIndex].questionText;
+    }
+
+    /// <summary>
+    /// Method to get the current answers for the current question in the current category.
+    /// </summary>
+    /// <returns></returns>
+    public List<string> GetCurrentAnswers()
+    {
+        return CurrentCategory.QuizQuestions[_currentQuestionIndex].answers;
+    }
+
+    /// <summary>
+    /// Method to check if the selected answer is correct for the current question in the current category.
+    /// </summary>
+    /// <param name="answerIndex"></param>
+    /// <returns></returns>
+    public bool IsCorrectAnswer(int answerIndex)
+    {
+        Debug.Log($"Checking answer: {answerIndex} for question index: {_currentQuestionIndex}");
+        Debug.Log($"Selected answer: {answerIndex} correct: {CurrentCategory.QuizQuestions[_currentQuestionIndex].correntAnswer}");
+        return CurrentCategory.QuizQuestions[_currentQuestionIndex].correntAnswer == answerIndex;
+    }
+
+    /// <summary>
+    /// Method to check if the current question is the last question.
+    /// </summary>
+    /// <returns></returns>
+    public bool IsLastQuestion()
+    {
+        return _currentQuestionIndex >= CurrentCategory.QuizQuestions.Count - 1;
+    }
+
+    /// <summary>
+    /// Method to move to the next question in the current category if posible. If the current question is the last one, it resets to the first question.   
+    /// </summary>
+    public void NextQuestion()
+    {
+        _currentQuestionIndex++;
+        if (_currentQuestionIndex >= CurrentCategory.QuizQuestions.Count)
+        {
+            _currentQuestionIndex = 0; // Reset to the first question if we exceed the count
+        }
     }
 
     private CategoryConfig GetCategoryConfig(CategoryTypes categoryType)

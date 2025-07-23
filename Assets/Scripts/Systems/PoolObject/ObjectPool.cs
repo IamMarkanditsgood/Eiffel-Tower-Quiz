@@ -1,3 +1,4 @@
+﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -18,7 +19,7 @@ public class ObjectPool<T> where T : Component
         _prefab = prefab;
         for (int i = 0; i < sizeOfPool; i++)
         {
-            T obj = Object.Instantiate(_prefab, _container, true);
+            T obj = UnityEngine.Object.Instantiate(_prefab, _container, true);
             obj.gameObject.SetActive(false);
             _disabledPool.Add(obj);          
         }
@@ -28,18 +29,21 @@ public class ObjectPool<T> where T : Component
         T obj;
         if (_disabledPool.Count > 0)
         {
-            obj = _disabledPool[^1];
-            _disabledPool.Remove(obj);
+            obj = _disabledPool[0];       
+            _disabledPool.RemoveAt(0);    
         }
         else
         {
-            obj = Object.Instantiate(_prefab, _container, true);
+            obj = UnityEngine.Object.Instantiate(_prefab, _container, true);
         }
-            _enabledPool.Add(obj);
+
+        _enabledPool.Add(obj);
+
         if (shitchOn)
-        { 
+        {
             obj.gameObject.SetActive(true);
         }
+
         return obj;
     }
 
@@ -49,5 +53,6 @@ public class ObjectPool<T> where T : Component
         obj.gameObject.SetActive(false);
         _disabledPool.Add(obj);
         _enabledPool.Remove(obj);
+        obj.transform.SetParent(_container, false);
     }
 }
