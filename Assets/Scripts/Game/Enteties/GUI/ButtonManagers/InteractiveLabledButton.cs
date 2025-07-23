@@ -1,0 +1,88 @@
+﻿using TMPro;
+using UnityEngine;
+using UnityEngine.EventSystems;
+using UnityEngine.UI;
+
+/// <summary>
+/// A button with a label that changes color on hover and change a cursor after point on it.
+/// </summary>
+public class InteractiveLabledButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
+{
+    [SerializeField] protected Button _button;
+    [SerializeField] protected TMP_Text _label;
+    [Header("Interaction")]
+    [SerializeField] private Color _normalColor = Color.white;
+    [SerializeField] private Color _hoverColor = Color.cyan;
+    private Image _image;
+    [Header("Cursor")]
+    [SerializeField] private Texture2D _cursorTexture;
+    [SerializeField] private Vector2 _hotspot = Vector2.zero;
+
+    public Button ButtonComponent => _button;
+
+    protected virtual void Awake()
+    {
+        if (_button == null)
+        {
+            _button = GetComponent<Button>();
+            if (_button == null)
+            {
+                Debug.LogWarning($"{GetType().Name} on {gameObject.name} had no Button — one was added.");
+                _button = gameObject.AddComponent<Button>();
+            }
+        }
+
+        _image = _button.GetComponent<Image>();
+        if (_image == null)
+        {
+            Debug.LogWarning($"{GetType().Name} on {gameObject.name} had no Image — one was added.");
+            _image = _button.gameObject.AddComponent<Image>();
+        }
+    }
+    private void OnDisable()
+    {
+        if (_image != null)
+            _image.color = _normalColor;
+        Cursor.SetCursor(null, Vector2.zero, CursorMode.Auto);
+    }
+
+    private void OnDestroy()
+    {
+        if (_image != null)
+            _image.color = _normalColor;
+        Cursor.SetCursor(null, Vector2.zero, CursorMode.Auto);
+    }
+    /// <summary>
+    /// Handles the pointer enter event by changing the UI element's appearance and cursor.
+    /// </summary>
+    /// <param name="eventData"></param>
+    public void OnPointerEnter(PointerEventData eventData)
+    {
+        if (_image != null)
+            _image.color = _hoverColor;
+
+        Cursor.SetCursor(_cursorTexture != null ? _cursorTexture : null, _hotspot, CursorMode.Auto);
+    }
+    /// <summary>
+    ///  Handles the pointer exit event by resetting the UI element's appearance and cursor.
+    /// </summary>
+    /// <remarks>This method restores the UI element's color to its normal state if an image is associated and
+    /// resets the cursor to the default system cursor.</remarks>
+    /// <param name="eventData">The event data associated with the pointer exit event.</param>
+    public void OnPointerExit(PointerEventData eventData)
+    {
+        if (_image != null)
+            _image.color = _normalColor;
+
+        Cursor.SetCursor(null, Vector2.zero, CursorMode.Auto);
+    }
+    /// <summary>
+    ///  method sets the label text of the button.
+    /// </summary>
+    /// <param name="text"></param>
+    public virtual void SetLabelText(string text)
+    {
+        if (_label != null)
+            _label.text = text;
+    }
+}

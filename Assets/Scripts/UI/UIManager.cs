@@ -17,13 +17,13 @@ public class UIManager
         {
             Instance = this;
         }
-        InitScreens();
 
-        Subscribe();
+        InitScreens();
+        InitPopups();
 
         if (_firstLoadedScreen != ScreenTypes.Default)
         {
-            ShowScreen(_firstLoadedScreen);
+            ShowScreen(_firstLoadedScreen, false);
         }
     }
 
@@ -33,7 +33,6 @@ public class UIManager
         {
             Instance = null;
         }
-        UnSubscribe();
     }
 
     public void Subscribe()
@@ -41,6 +40,10 @@ public class UIManager
         foreach (var screen in _screens)
         {
             screen.Subscribe();
+        }
+        foreach (var popup in _popups)
+        {
+            popup.Subscribe();
         }
     }
 
@@ -50,6 +53,10 @@ public class UIManager
         {
             screen.UnSubscribe();
         }
+        foreach(var popup in _popups)
+        {
+            popup.Unsubscribe();
+        }
     }
 
     private void InitScreens()
@@ -57,6 +64,14 @@ public class UIManager
         foreach (var screen in _screens)
         {
             screen.Init();
+        }
+    }
+
+    private void InitPopups()
+    {
+        foreach (var popup in _popups)
+        {
+            popup.Init();
         }
     }
 
@@ -95,7 +110,6 @@ public class UIManager
         {
             if(screen.ScreenType == screenType)
             {
-                Debug.Log(screenType);
                 screen.Show();
             }
         }

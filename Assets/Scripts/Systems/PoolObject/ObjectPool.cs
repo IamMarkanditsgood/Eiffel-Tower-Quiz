@@ -1,6 +1,5 @@
-using System.Collections;
+﻿using System;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class ObjectPool<T> where T : Component
@@ -11,8 +10,6 @@ public class ObjectPool<T> where T : Component
     private readonly List<T> _enabledPool = new List<T>();
     private readonly List<T> _disabledPool = new List<T>();
 
-    private Coroutine _lifeTimer;
-
     public List<T> EnabledPool => _enabledPool;
     public List<T> DisabledPool => _disabledPool;
 
@@ -22,36 +19,40 @@ public class ObjectPool<T> where T : Component
         _prefab = prefab;
         for (int i = 0; i < sizeOfPool; i++)
         {
-            T obj = Object.Instantiate(_prefab, _container, true);
-            obj.gameObject.SetActive(false);
-            _disabledPool.Add(obj);          
+            T @object = UnityEngine.Object.Instantiate(_prefab, _container, true);
+            @object.gameObject.SetActive(false);
+            _disabledPool.Add(@object);          
         }
     }
     public T GetFreeComponent(bool shitchOn = true)
     {
-        T obj;
+        T @object;
         if (_disabledPool.Count > 0)
         {
-            obj = _disabledPool[^1];
-            _disabledPool.Remove(obj);
+            @object = _disabledPool[0];       
+            _disabledPool.RemoveAt(0);    
         }
         else
         {
-            obj = Object.Instantiate(_prefab, _container, true);
+            @object = UnityEngine.Object.Instantiate(_prefab, _container, true);
         }
-            _enabledPool.Add(obj);
+
+        _enabledPool.Add(@object);
+
         if (shitchOn)
-        { 
-            obj.gameObject.SetActive(true);
+        {
+            @object.gameObject.SetActive(true);
         }
-        return obj;
+
+        return @object;
     }
 
-    public void DisableComponent(T obj)
+    public void DisableComponent(T @object)
     {
         
-        obj.gameObject.SetActive(false);
-        _disabledPool.Add(obj);
-        _enabledPool.Remove(obj);
+        @object.gameObject.SetActive(false);
+        _disabledPool.Add(@object);
+        _enabledPool.Remove(@object);
+        @object.transform.SetParent(_container, false);
     }
 }
